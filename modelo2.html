@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <link rel="stylesheet" href="estilopizza.css">
+    <title>Document</title>
+</head>
+<body>
+    <model-viewer id="model-viewer" src="capu.glb" ar ar-modes="scene-viewer webxr" camera-controls auto-rotate camera-orbit="1701deg 54.86deg 0.2508m" ar ios-src="capu.usdz" skybox-image="tablecloth-red-and-white-texture-1040411-wallhere.com.jpg" poster="capu.png">
+        <div id="error" class="hide">AR is not supported on this device</div>
+        <div class="progress-bar hide" slot="progress-bar">
+            <div class="update-bar"></div>
+        </div>
+        <button slot="ar-button" id="ar-button">
+            Ver en tu Mesa
+        </button>
+        <div id="ar-prompt">
+            <img src="ar_hand_prompt.png">
+        </div>
+      </model-viewer>
+      <script>
+        document.querySelector("#model-viewer").addEventListener('ar-status', (event) => {
+          if(event.detail.status === 'failed'){
+            const error = document.querySelector("#error");
+            error.classList.remove('hide');
+            error.addEventListener('transitionend',(event) => {
+              error.classList.add('hide');
+            });
+          }
+        });
+      </script>
+      <style>
+ 
+        #error {
+          background-color: #ffffffdd;
+          border-radius: 16px;
+          padding: 16px;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate3d(-50%, -50%, 0);
+          transition: opacity 0.3s;
+        }
+        #error.hide {
+          opacity: 0;
+          visibility: hidden;
+          transition: visibility 2s, opacity 1s 1s;
+        }
+      </style>
+
+    
+</body>
+</html>
+
+
+
